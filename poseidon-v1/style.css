@@ -1,0 +1,578 @@
+@import "reset.css";
+
+/* NOTE:
+ * Grid layout stuff starts at line 138. 
+ * The stuff before is just boring old CSS to make content look not crappy.
+ */
+
+/*--------------------------------------------------------------
+CSS Reset
+--------------------------------------------------------------*/
+* {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html {
+	font-family: Ubuntu;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust:     100%;
+}
+
+body {
+	background-color: #f6f9fc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0px;
+    width: 100%;
+	height: 100%;
+}
+
+img {
+	display: block;
+	border: 0;
+	width: 100%;
+	height: auto;
+}
+
+
+/*--------------------------------------------------------------
+Accessibility
+--------------------------------------------------------------*/
+/* Text meant only for screen readers */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:hover,
+.screen-reader-text:active,
+.screen-reader-text:focus {
+	clip: auto !important;
+	display: block;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar */
+}
+
+
+/*--------------------------------------------------------------
+Typography
+--------------------------------------------------------------*/
+body,
+button,
+input,
+select,
+textarea {
+	color: #fff;
+	font-family: 'Ubuntu','Helvetica', Arial, sans-serif;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	padding: 1em 0;
+}
+
+p {
+	margin: 0;
+	padding: 1em 0;
+}
+
+/*--------------------------------------------------------------
+General styles
+--------------------------------------------------------------*/
+.site {
+	background: #4c7bd9;
+	min-height: 100vh;
+}
+
+.masthead,
+.main-content,
+.sidebar,
+.twin,
+.footer {
+	padding: 1em 2em;
+}
+
+.main-content {
+	 background: #133e5a;
+	 color: black;
+}
+
+.masthead {
+	background: #113953;
+	color: white;
+}
+
+.sidebar {
+	background: #18496b;
+}
+
+.twin {
+	background: #216999;
+}
+
+.colophon {
+	padding: 2em;
+	color: white;
+}
+
+footer {
+	background: #113953;
+	color: white;
+}
+
+.colophon a {
+	color: white;
+}
+
+.colophon a:hover,
+.colophon a:focus {
+	border-bottom: 1px solid white;
+}
+
+/*--------------------------------------------------------------
+If no grid support, limit width to 50em and center align
+--------------------------------------------------------------*/
+/*@supports not (display: grid) {
+	.site {
+		max-width: 500px;
+		margin: 0 auto;
+	}
+}*/
+
+/*--------------------------------------------------------------
+CSS Grid layout for wider screens, when browser supports grid:
+--------------------------------------------------------------*/
+
+@media screen and (min-width: 500px) {
+	@supports (display: grid) {
+		.site {
+			display: grid;
+			grid-template-columns: 1fr repeat(6, minmax(auto, 10em)) 1fr;
+			grid-template-rows: minmax(1em, auto) 1fr auto minmax(1em, auto);
+			overflow: hidden;
+		    vertical-align: baseline;
+		}
+
+		.masthead,
+		.colophon {
+			grid-column: span 7;
+		}
+
+		.main-content {
+			grid-column: 1/8;
+		}
+
+		.sidebar {
+			grid-column: 1/8;
+		}
+
+		.twin {
+			/*grid-column: 2/5;
+			grid-row: 3/4;*/
+			width: 898px;
+			height: 400px;
+			grid-column: 1/8;
+			padding-top: 16px;
+			padding-left: 32px;
+			padding-right: 30px;
+			padding-bottom: 16px;
+		}
+
+		.weather-left-card__degree,
+	    .weather-left-card__number {
+		    visibility: visible;
+	    }
+	}
+}
+
+@media (max-width: 800px) {
+	.site {
+		width: 100%;
+		height: 100%;
+	}
+
+	aside.sidebar {
+		width: 100%;
+		height: 500px;
+	}
+
+	aside.twin {
+		width: 100%;
+		height: 100%;
+	}
+
+	#container {
+		position: relative;
+		top: 0;
+		left: -30px;
+		width: 500px;
+		height: 500px;
+	}
+
+    div.widget-left-menu.widget-left-menu--blue {
+		 position: relative;
+		 top: 0;
+		 left: 50px;      
+	}
+	
+	div.widget-left-menu__layout>
+	h2.widget-left-menu__header {
+		 position: relative;
+		 top: 0;
+		 left: 150px;
+		 font-size: 1.82em;
+	}
+
+    div.widget-left-menu__layout>
+	div.widget-left-menu__links {
+		 position: relative;
+		 top: 350px;
+		 left: -500px;
+	}
+
+	.weather-left-card__degree,
+	.weather-left-card__number {
+		visibility: hidden;
+	}
+
+	div.widget-left__calendar {
+		position: relative;
+		top: 50px;
+		left: -150px; 
+		
+	}
+	
+    div.weather-left-card__row1> 
+	img.weather-left-card__img {
+		  visibility: hidden;
+	}
+	
+	div.weather-left-card__row2>
+	p.weather-left-card__means,
+	div.weather-left-card__row2> 
+	p.weather-left-card__wind,
+	div.weather-left-card__col>
+	span.weather-left-card__rising {
+	      visibility: hidden;
+	}
+	
+	@media (max-width: 600px) {
+	     div.widget-left-menu__layout>
+	     h2.widget-left-menu__header {
+			position: relative;
+			top: 0;
+			left: 50px;
+			font-size: 1.82em;
+	    }
+
+		div.widget-left__calendar {
+			position: relative;
+			top: 50px;
+			left: -230px; 
+		}   
+
+		#container {
+			position: relative;
+			top: 0;
+			left: -30px;
+			width: 350px;
+			height: 500px;
+		}	
+	}
+}
+
+ #map { 
+	position: relative; 
+	top: 0;
+	left: 0;  
+	width: 100%;
+	height: 300px; 
+}
+
+header.masthead>
+h2.site-title {
+	text-align: center;
+}
+
+div.mapboxgl-ctrl-top-right {
+	top: 20px;
+	left: 300px;
+}
+
+div.mapboxgl-ctrl-geocoder {   
+	border: 0px;
+	border-style: none;
+	border-width: thin;
+	border-color: transparent;  	
+}
+
+input.mapboxgl-ctrl-geocoder--input {
+	font: inherit;
+    width: 100%;
+    margin: 0;
+    height: 40px;
+    color: #404040;
+	color: rgba(0, 0, 0, 0.75);
+	text-overflow: ellipsis;
+    white-space: nowrap;
+	overflow: hidden;
+} 
+
+div.widget-left-menu--blue {
+	background-image: linear-gradient(to top left,#18496b,#18496b);
+}
+
+div.widget-left--blue, .widget-left__body--blue {
+	background-image: linear-gradient(to top,#18496b,#18496b);
+}
+
+div.widget-left {
+	border-radius: 0px;
+	background-color: #18496b;
+	box-shadow: none;
+	width: 100%;
+}
+
+div.weather-left-card {
+	float: left;
+}
+
+div.widget-left-menu--blue 
+   .widget-left-menu__layout, 
+   .widget-left-menu--brown 
+   .widget-left-menu__layout {
+       border-bottom: 2px solid #547488;    
+}
+
+h2.widget-left-menu__header {
+	float: none;
+	text-align: left;
+	color: #fff;
+}
+
+ul.calendar>li.calendar__item {
+	color: #8199a8;
+    text-align: center;
+}
+
+div.weather-left-card__col>p {
+    color: #fff;
+}
+
+img.weather-left-card__img {
+	position: relative;
+	top: -50px;
+	left: -20px;
+	visibility: visible;
+}
+
+p.weather-left-card__number>
+span.weather-left-card__degree {
+	color: #fff;
+}
+
+p.weather-left-card__means, 
+p.weather-left-card__wind {
+	position: relative;
+	top: -70px;
+	right: 50px;
+	color: #8199a8;
+	visibility: visible;
+}
+
+div.weather-left-card__col span {
+	color: #8199a8;
+}
+
+span.weather-left-card__rising {
+	position: relative;
+	top: 10px;
+	right: 100px;
+	visibility: visible;
+}
+
+div.widget-left-menu__links>span {
+    color: #5a839f;
+}
+
+span.widget-left-menu__link {
+	color: #5a839f!important;
+}
+
+svg.axis {
+	position: relative;
+    top: -30px;
+    left: 10px;
+}
+
+/* social style */
+
+ #social {
+	/* border: 1px solid black; */
+	height: 170px;
+	width: 55px;
+	position: fixed;
+	top: 25%;
+	left: 0;
+	z-index: 10;
+  }
+
+  #social ul {
+	list-style-type: none;
+  }
+
+  #social ul li {
+  /*   border: 1px solid black; */
+	margin-left: 1%;
+	height: 55px;
+	width: 100%;
+	position:relative;
+	transition: width .3s;
+  }
+
+  #social ul li:hover {
+  /*   border: 1px solid black; */
+	width: 150%;
+  }
+  
+  ul a {
+	text-decoration: none;
+	color: white;
+  /*   position: relative; */
+  }
+
+  #facebook-icon {
+	background: #4868ad;
+  }
+  
+  #github-icon {
+	background: #4b4c49;
+  }
+  
+  #instagram-icon {
+	background: radial-gradient(circle at 25% 110%,#fdf497 0,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%),radial-gradient(circle at 25% 110%,#b9a800 0,#938500 5%,#b10f00 45%,#8c0061 60%,#002ca9 90%);
+  }
+  
+  #facebook-icon div {
+	right: 5px;
+  }
+  
+  #github-icon div {
+	right: 10px;
+  }
+  
+  #twitter-icon div {
+	right: 10px;
+  }
+  
+  #instagram-icon div {
+	right: 10px;
+  }
+
+  .social-icon { 
+	position: absolute;
+  /*   border: 1px solid black; */
+	width: 40px;
+	height: 40px;
+	top: 7px;
+  }
+
+  .social-icon span i {
+	font-size: 40px;
+  /*   border: 1px solid black; */
+  /*   position: absolute; */
+  }
+  
+
+  #twitter-icon {
+	background: #3299FF
+  }
+  
+  span.footer-year {
+	  color: #fff;
+  }
+
+  span.footer-copy {
+	  color: #2f80b9;
+  }
+
+  span.footer-email {
+	  color: #97825c;
+  }
+   
+  footer {
+	  text-align: center;
+  }
+
+  span.footer-char {
+	  color: #fff;
+  }
+
+  canvas#myChart.chartjs-render-monitor {
+	  overflow: hidden;
+  }
+
+/*#geocoder-container > div {
+	min-width:50%;
+	margin-left:25%;
+}*/
+
+
+div.mapboxgl-popup-content {
+	width: 250px;
+	height: 200px;
+	overflow: hidden;
+}
+
+div.mapboxgl-popup-content
+.widget-content-title {
+	position: relative;
+	top: -40px;
+	left: 0;
+	font-size: 3em;
+	text-align: center;
+	border-bottom: 1px solid #d9dfe0;
+	line-height: 1em;
+}
+
+img.widget-content-img {
+	position: relative;
+	top: -60px;
+    left: 10px;
+	width: 80px;
+	height: 80px;
+	float: right;
+}
+
+div.widget-content-info {
+	position: relative;
+	top: -50px;
+	left: 0;
+	list-style: none;
+	font-weight: 650;
+	vertical-align: baseline;
+	text-overflow: ellipsis;
+	font-size: 1.15em;
+}
+
+ul.widget-content-list {
+	list-style: none;
+}
